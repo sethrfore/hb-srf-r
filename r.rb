@@ -27,6 +27,19 @@ class R < Formula
   depends_on "cairo"
   depends_on "sethrfore/r-srf/tcl-tk-x11" => :optional
   depends_on "texinfo" => :optional
+  
+  # RZF additions
+  depends_on "llvm"
+  depends_on "ccache"
+  depends_on "libomp"
+  depends_on "libgit2"
+  depends_on "openssl"
+  depends_on "gdal"
+  depends_on "geos"
+  depends_on "proj"
+  depends_on "udunits"
+  depends_on "qt"
+  depends_on "fribidi"
 
   uses_from_macos "curl"
   uses_from_macos "icu4c"
