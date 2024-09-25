@@ -21,10 +21,10 @@ class R < Formula
   depends_on "readline"
   depends_on "xz"
   # depends_on "icu4c" => :optional
-  depends_on "libtiff" => :optional
-  depends_on "openblas" => :optional
+  depends_on "libtiff"
+  depends_on "openblas"
   depends_on "openjdk" => :optional
-  depends_on "cairo" => :optional
+  depends_on "cairo"
   depends_on "sethrfore/r-srf/tcl-tk-x11" => :optional
   depends_on "texinfo" => :optional
 
@@ -61,17 +61,11 @@ class R < Formula
       "--enable-R-shlib",
       # "SED=/usr/bin/sed", # don't remember Homebrew's sed shim
       "FC=#{Formula["gcc"].opt_bin}/gfortran",
+	  "--with-blas=-L#{Formula["openblas"].opt_lib} -lopenblas",
+	  "--with-cairo",
     ]
 
     ## SRF - Add supporting flags for optional packages
-    if build.with? "openblas"
-      args << "--with-blas=-L#{Formula["openblas"].opt_lib} -lopenblas"
-      args << "--with-lapack"
-    else
-      args << "--with-blas=-framework Accelerate"
-      ENV.append_to_cflags "-D__ACCELERATE__" if ENV.compiler != :clang
-    end
-
     args << if build.with? "openjdk"
       "--enable-java"
     else
@@ -84,12 +78,6 @@ class R < Formula
       args << "--with-tk-config=#{Formula["tcl-tk-x11"].opt_lib}/tkConfig.sh"
     else
       args << "--without-tcltk"
-    end
-
-    args << if build.with? "cairo"
-      "--with-cairo"
-    else
-      "--without-cairo"
     end
 
     # Help CRAN packages find gettext and readline
