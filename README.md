@@ -9,16 +9,21 @@ On macOS, you must first install XCode Command Line Tools, but this should be in
 This modified R formula can be installed as follows.
 
 Add the repository to your homebrew
-
-`brew tap cole-trapnell-lab/homebrew-r-srf`
+```sh
+brew tap cole-trapnell-lab/homebrew-r-srf
+```
 
 Check available installation options
 
-`brew info cole-trapnell-lab/r-srf/r`
+```sh
+brew info cole-trapnell-lab/r-srf/r
+```
 
-Compile the modified R formula from source with desired options
+Compile the modified R formula:
 
-`brew install -s cole-trapnell-lab/r-srf/r`
+```sh
+brew install cole-trapnell-lab/r-srf/r
+```
 
 Note: If necessary, remove previous R and cairo installations prior to compiling the modified R formula. Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`. You should see the following:
 ```r
