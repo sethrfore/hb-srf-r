@@ -146,9 +146,9 @@ class R < Formula
 
   def caveats
     <<~EOS
-	  You will likely need `cmake` to install some R packages. Please install it by running:
-	    brew install --cask cmake
-	EOS
+      You will likely need `cmake` to install some R packages. Please install it by running:
+        brew install --cask cmake
+    EOS
   end
 
   test do
