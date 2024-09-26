@@ -25,7 +25,31 @@ Compile the modified R formula:
 brew install cole-trapnell-lab/r-srf/r
 ```
 
-Note: If necessary, remove previous R and cairo installations prior to compiling the modified R formula. Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`. You should see the following:
+Note: If necessary, remove previous R and cairo installations prior to compiling the modified R formula. Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`. You can test if everything is as expected with the following:
+```r
+all(capabilities == c(jpeg = TRUE,
+					  png = TRUE,
+					  tiff = TRUE,
+					  tcltk = FALSE,
+					  X11 = FALSE,
+					  aqua = TRUE,
+					  `http/ftp` = TRUE,
+					  sockets = TRUE,
+					  libxml = FALSE,
+					  fifo = TRUE,
+					  cledit = TRUE,
+					  iconv = TRUE,
+					  NLS = TRUE,
+					  Rprof = TRUE,
+					  profmem = TRUE,
+					  cairo = TRUE,
+					  ICU = TRUE,
+					  long.double = FALSE,
+					  libcurl = TRUE)
+)
+```
+
+If the result of the above is not TRUE, check the individual `capabilities()`:
 ```r
        jpeg         png        tiff       tcltk         X11        aqua
        TRUE        TRUE        TRUE       FALSE       FALSE        TRUE
