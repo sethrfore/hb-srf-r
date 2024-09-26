@@ -40,7 +40,6 @@ class R < Formula
   depends_on "udunits"
   depends_on "qt"
   depends_on "fribidi"
-  depends_on "cmake"
 
   uses_from_macos "curl"
   uses_from_macos "icu4c"
@@ -143,6 +142,13 @@ class R < Formula
 
     ## SRf - R/X11 support deprecation notice
     opoo "Future R/X11 support deprecation notice.\nSee repository README and/or contribute to the discussion page at:\nhttps://github.com/sethrfore/homebrew-r-srf/discussions/40\n\n"
+  end
+
+  def caveats
+    <<~EOS
+	  You will likely need `cmake` to install some R packages. Please install it by running:
+	    brew install --cask cmake
+	EOS
   end
 
   test do
