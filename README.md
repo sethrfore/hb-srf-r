@@ -25,6 +25,14 @@ Compile the modified R formula:
 brew install cole-trapnell-lab/r-srf/r
 ```
 
+You should also install the `cmake` cask so you can install some R packages:
+
+```sh
+brew install --cask cmake
+```
+
+Check if the default R is correct by running `which R`. It should be `$(brew --prefix)/bin/R`, e.g. `/opt/homebrew/bin/R`. You might have to start a new terminal session for it to take effect.
+
 Note: If necessary, remove previous R and cairo installations prior to compiling the modified R formula. Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`. You can test if everything is as expected with the following:
 ```r
 all(capabilities == c(jpeg = TRUE,
