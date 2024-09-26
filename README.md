@@ -1,38 +1,36 @@
 # Customizable R formula for Homebrew
 
-Custom hombrew r formula. Tcl-Tk support is added by default using the Mac OS system Tcl-Tk framework (see r.rb formula lines 61-63). The formula also provides optional support for the following dependencies: Cairo, IUC, Java, LibTIFF, OpenBLAS, Pango and TexInfo. 
+This is a custom Homebrew R formula that enables OpenBLAS and OpenMP for accelerated linear algebra. It does not require X11/XQuartz and instead relies on Cairo for graphics support. It includes dependencies listed in [this blog post](https://www.btskinner.io/code/install-r-with-openblas-and-openmp-on-macos-mojave/) by Benjamin T. Skinner.
 
-Operational X11/Xquartz and macOS Command Line Tools installations are build requirements. X11/Xquartz is required because the tk.h header file used in [base r tcltk package includes X11 headers](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Tcl_002fTk). 
-
-On macOS, Xcode must be installed for the appropriate Tcl-Tk config files to be available. 
-
-# Cairo X11
-In order for cairo support it is necessary to install a version of cairo with X11 headers. Since the Homebrew core cairo formula no longer supports the `--with-x11` option, a custom cairo formula has been made available in this repository that will support R with cairo device capabilities. If this option is desired and you have a previously installed Homebrew version of cairo, reinstall  using the formula provided here `brew rm cairo && brew install -s sethrfore/r-srf/cairo-x11`. Otherwise `brew install -s sethrfore/r-srf/cairo-x11` should be sufficient. This may neccesitate reinstallation of other formulae depending on cairo. 
-
-# Tcl-Tk X11
-An X11 tcl-tk build can be installed via the tcl-tk-x11 formula available [here](https://github.com/sethrfore/homebrew-extras). To install, do as follows:
-
-`brew tap sethrfore/homebrew-r-srf`
-
-`brew install sethrfore/r-srf/tcl-tk-x11`
+On macOS, you must first install XCode Command Line Tools, but this should be installed with Homebrew. Seth Fore's version also includes Tcl-Tk by default, but we do not require it. There is also optional support for IUC, Java, Pango, and TexInfo, but none of these are strictly required.
 
 # Installation
 
-When all system dependecies addressed in the previous section have been met, this modified R formula can be installed as follows.
+This modified R formula can be installed as follows.
 
 Add the repository to your homebrew
 
-`brew tap sethrfore/homebrew-r-srf`
+`brew tap cole-trapnell-lab/homebrew-r-srf`
 
 Check available installation options
 
-`brew info sethrfore/r-srf/r`
+`brew info cole-trapnell-lab/r-srf/r`
 
 Compile the modified R formula from source with desired options
 
-`brew install -s sethrfore/r-srf/r --with-cairo-x11 --with-tcl-tk-x11`
+`brew install -s cole-trapnell-lab/r-srf/r`
 
-Note: If necessary, remove previous R and cairo installations prior to compiling the modified R formula. Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`.
+Note: If necessary, remove previous R and cairo installations prior to compiling the modified R formula. Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`. You should see the following:
+```r
+       jpeg         png        tiff       tcltk         X11        aqua
+       TRUE        TRUE        TRUE       FALSE       FALSE        TRUE
+   http/ftp     sockets      libxml        fifo      cledit       iconv
+       TRUE        TRUE       FALSE        TRUE        TRUE        TRUE
+        NLS       Rprof     profmem       cairo         ICU long.double
+       TRUE        TRUE        TRUE        TRUE        TRUE       FALSE
+    libcurl
+       TRUE
+```
 
 # R/X11 support deprectation notice
 
