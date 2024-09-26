@@ -10,7 +10,7 @@ This modified R formula can be installed as follows.
 
 Add the repository to your homebrew
 ```sh
-brew tap cole-trapnell-lab/homebrew-r-srf
+brew tap cole-trapnell-lab/r-srf
 ```
 
 Check available installation options
