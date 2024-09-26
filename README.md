@@ -31,9 +31,9 @@ You should also install the `cmake` cask so you can install some R packages:
 brew install --cask cmake
 ```
 
-Check if the default R is correct by running `which R`. It should be `$(brew --prefix)/bin/R`, e.g. `/opt/homebrew/bin/R`. You might have to start a new terminal session for it to take effect.
+Check if the default R is correct by running `which R`. It should be `$(brew --prefix)/bin/R`, e.g. `/opt/homebrew/bin/R`. You might have to start a new terminal session for it to take effect. 
 
-Note: If necessary, remove previous R and cairo installations prior to compiling the modified R formula. Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`. You can test if everything is as expected with the following:
+Once installed, the compiled dependencies can be checked by invoking R and running `capabilities()`. You can test if everything is as expected with the following:
 ```r
 all(capabilities == c(jpeg = TRUE,
 					  png = TRUE,
@@ -68,6 +68,8 @@ If the result of the above is not TRUE, check the individual `capabilities()`:
     libcurl
        TRUE
 ```
+
+Once the capabilities are properly set, you can safely uninstall previous versions of R. You may have to reinstall your R libraries.
 
 # R/X11 support deprectation notice
 
