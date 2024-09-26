@@ -40,6 +40,7 @@ class R < Formula
   depends_on "udunits"
   depends_on "qt"
   depends_on "fribidi"
+  depends_on "cmake"
 
   uses_from_macos "curl"
   uses_from_macos "icu4c"
