@@ -2,7 +2,7 @@
 
 This is a custom Homebrew R formula that enables OpenBLAS and OpenMP for accelerated linear algebra. It does not require X11/XQuartz and instead relies on Cairo for graphics support. It includes dependencies listed in [this blog post](https://www.btskinner.io/code/install-r-with-openblas-and-openmp-on-macos-mojave/) by Benjamin T. Skinner.
 
-On macOS, you must first install XCode Command Line Tools, but this should be installed with Homebrew. Seth Fore's version also includes Tcl-Tk by default, but we do not require it. There is also optional support for IUC, Java, Pango, and TexInfo, but none of these are strictly required.
+On macOS, you must first install XCode Command Line Tools, but this should be installed with Homebrew. There is optional support for Tcl-Tk, IUC, Java, Pango, and TexInfo, but none of these are strictly required.
 
 # Installation
 
@@ -10,19 +10,19 @@ This modified R formula can be installed as follows.
 
 Add the repository to your homebrew
 ```sh
-brew tap cole-trapnell-lab/r-srf
+brew tap sethrfore/r-srf
 ```
 
 Check available installation options
 
 ```sh
-brew info cole-trapnell-lab/r-srf/r
+brew info sethrfore/r-srf/r
 ```
 
 Compile the modified R formula:
 
 ```sh
-brew install cole-trapnell-lab/r-srf/r
+brew install sethrfore/r-srf/r
 ```
 
 You should also install the `cmake` cask so you can install some R packages:
