@@ -75,6 +75,7 @@ class R < Formula
       # "SED=/usr/bin/sed", # don't remember Homebrew's sed shim
       "FC=#{Formula["gcc"].opt_bin}/gfortran",
 	  "--with-blas=-L#{Formula["openblas"].opt_lib} -lopenblas",
+	  "--with-lapack",
 	  "--with-cairo",
     ]
 
