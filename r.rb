@@ -13,8 +13,8 @@ class R < Formula
 
   depends_on "pkg-config" => :build
   depends_on "cairo"
-  depends_on "fontconfig"
-  depends_on "freetype"
+  # depends_on "fontconfig"
+  # depends_on "freetype"
   depends_on "gcc" # for gfortran
   depends_on "gettext"
   # depends_on "icu4c"
@@ -31,11 +31,28 @@ class R < Formula
   depends_on "texinfo"
   depends_on "xz"
 
+  # uses_from_macos "curl"
+  # uses_from_macos "icu4c"
+  # uses_from_macos "libxml2"
+  # uses_from_macos "expat"
+  # uses_from_macos "libffi", since: :catalina
+
+  uses_from_macos "bzip2"
   uses_from_macos "curl"
   uses_from_macos "icu4c"
-  uses_from_macos "libxml2"
-  uses_from_macos "expat"
   uses_from_macos "libffi", since: :catalina
+  uses_from_macos "zlib"
+
+  on_macos do
+    depends_on "fontconfig"
+    depends_on "freetype"
+    depends_on "libx11"
+    depends_on "libxau"
+    depends_on "libxcb"
+    depends_on "libxdmcp"
+    depends_on "libxrender"
+    depends_on "pixman"
+  end
 
   on_linux do
     depends_on "libice"
