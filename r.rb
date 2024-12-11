@@ -1,10 +1,10 @@
 class R < Formula
   desc "Software environment for statistical computing"
   homepage "https://www.r-project.org/"
-  url "https://cran.r-project.org/src/base/R-4/R-4.4.1.tar.gz"
-  sha256 "b4cb675deaaeb7299d3b265d218cde43f192951ce5b89b7bb1a5148a36b2d94d"
+  url "https://cran.r-project.org/src/base/R-4/R-4.4.2.tar.gz"
+  sha256 "1578cd603e8d866b58743e49d8bf99c569e81079b6a60cf33cdf7bdffeb817ec"
   license "GPL-2.0-or-later"
-  revision 1
+  revision 2
 
   livecheck do
     url "https://cran.rstudio.com/banner.shtml"
@@ -13,21 +13,18 @@ class R < Formula
 
   depends_on "pkg-config" => :build
   depends_on "cairo"
-  # depends_on "fontconfig"
-  # depends_on "freetype"
   depends_on "gcc" # for gfortran
   depends_on "gettext"
-  # depends_on "icu4c"
   depends_on "jpeg-turbo"
-  # depends_on "libffi"
   depends_on "libpng"
+  depends_on "libxext"
   depends_on "libtiff"
   depends_on "openblas"
   depends_on "openjdk"
   depends_on "pango"
   depends_on "pcre2"
   depends_on "readline"
-  depends_on "tcl-tk"
+  depends_on "tcl-tk@8"
   depends_on "texinfo"
   depends_on "xz"
 
@@ -52,6 +49,7 @@ class R < Formula
     depends_on "libxdmcp"
     depends_on "libxrender"
     depends_on "pixman"
+    depends_on "icu4c@76"
   end
 
   on_linux do
@@ -74,10 +72,6 @@ class R < Formula
     ## SRF - Add Tex to path, uncomment if mactex is installed and desired
     ENV.append_path "PATH", "/Library/TeX/texbin"
 
-    # # BLAS detection fails with Xcode 12 due to missing prototype
-    # # https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18024
-    # ENV.append "CFLAGS", "-Wno-implicit-function-declaration"
-
     # `configure` doesn't like curl 8+, but convince it that everything is ok.
     # TODO: report this upstream.
     ENV["r_cv_have_curl728"] = "yes"
@@ -86,8 +80,8 @@ class R < Formula
       "--prefix=#{prefix}",
       "--enable-memory-profiling",
       "--with-tcltk",
-      "--with-tcl-config=#{Formula["tcl-tk"].opt_lib}/tclConfig.sh",
-      "--with-tk-config=#{Formula["tcl-tk"].opt_lib}/tkConfig.sh",
+      "--with-tcl-config=#{Formula["tcl-tk@8"].opt_lib}/tclConfig.sh",
+      "--with-tk-config=#{Formula["tcl-tk@8"].opt_lib}/tkConfig.sh",
       "--with-blas=-L#{Formula["openblas"].opt_lib} -lopenblas",
       "--enable-R-shlib",
       "--enable-java",
@@ -147,10 +141,9 @@ class R < Formula
     lib.install_symlink Dir[r_home/"lib/*"]
 
     # avoid triggering mandatory rebuilds of r when gcc is upgraded
-    check_replace = OS.mac?
     inreplace lib/"R/etc/Makeconf", Formula["gcc"].prefix.realpath,
                                     Formula["gcc"].opt_prefix,
-                                    check_replace
+                                    audit_result: OS.mac?
   end
 
   def post_install
